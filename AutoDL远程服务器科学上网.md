@@ -119,7 +119,9 @@ Host region-9.autodl.pro
 ```
 
 5️⃣ 远程服务器codex文件配置，先下载codex插件
+
 vscode下载codex插件才会生成.codex文件
+
 5.1 复制 .codex/auth.json（或其他认证文件）
 若远程服务器需要访问 ChatGPT / Codex 等服务，需要同步认证文件。
 
