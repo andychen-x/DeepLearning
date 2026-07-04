@@ -176,8 +176,8 @@ https_proxy="http://127.0.0.1:9567"
 ```
 
 ## 感谢与reference
-- 感谢赵栋栋提供的技术支持
-- https://cccignore.github.io/2025/06/21/%E8%BF%9C%E7%A8%8B%20SSH%20%E4%BD%BF%E7%94%A8%20Codex%EF%BC%9A%E8%BD%AC%E5%8F%91%E6%9C%AC%E5%9C%B0%20Clash%20%E4%BB%A3%E7%90%86%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/index.html
+- 感谢Dongdong Zhao提供的技术支持
+- [一步一步：让远程服务器通过本地 Clash 科学上网](https://cccignore.github.io/2025/06/21/%E8%BF%9C%E7%A8%8B%20SSH%20%E4%BD%BF%E7%94%A8%20Codex%EF%BC%9A%E8%BD%AC%E5%8F%91%E6%9C%AC%E5%9C%B0%20Clash%20%E4%BB%A3%E7%90%86%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/index.html)
 
 
 
