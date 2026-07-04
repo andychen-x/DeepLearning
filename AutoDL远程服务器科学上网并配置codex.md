@@ -1,7 +1,9 @@
 
+# AutoDL远程服务器科学上网并配置codex.md
+
 适用于任何 Ubuntu / Debian / 其他 Linux 服务器，通过本地 Clash 等代理实现科学上网，同时完成远程服务器 codex 配置。
 
-0️⃣ 前置准备：确认本地代理正常
+## 0️⃣ 前置准备：确认本地代理正常
 
 先确保你本地的 Clash 能联网。在本地电脑终端执行：
 ```bash
@@ -18,7 +20,7 @@ SOCKS5：7898
 可在 Clash Dashboard 查看端口。
 
 
-1️⃣ 建立 SSH 反向代理隧道
+## 1️⃣ 建立 SSH 反向代理隧道
 
 关键步骤：让远程服务器“反向”访问你本地的代理。在本地电脑执行(win+r cmd，下面详细在远程服务器查看)：
 ```bash
@@ -53,7 +55,7 @@ region-9.autodl.pro：远程服务器的域名（也可以换成 IP 地址），
 
 
 
-2️⃣ 在远程服务器上设置代理环境变量
+## 2️⃣ 在远程服务器上设置代理环境变量
 
 2.1 临时设置（当前会话生效）
 在远程终端执行：
@@ -90,7 +92,7 @@ echo 'export no_proxy="localhost,127.0.0.1,.local"' >> ~/.zshrc
 source ~/.zshrc
 ```
 
-3️⃣ 测试代理是否生效
+## 3️⃣ 测试代理是否生效
 
 在远程服务器执行：
 ```bash
@@ -106,7 +108,7 @@ apt update
 git clone https://github.com/openai/openai-cookbook.git
 ```
 
-4️⃣ VS Code Remote SSH 自动化配置
+## 4️⃣ VS Code Remote SSH 自动化配置
 
 config文件
 点击左下角ssh，连接到主机，配置SSH主机
@@ -121,7 +123,7 @@ Host region-9.autodl.pro
     ServerAliveCountMax 3
 ```
 
-5️⃣ 远程服务器codex文件配置，先下载codex插件
+## 5️⃣ 远程服务器codex文件配置，先下载codex插件
 
 vscode下载codex插件才会生成.codex文件
 
@@ -173,7 +175,9 @@ http_proxy="http://127.0.0.1:9567"
 https_proxy="http://127.0.0.1:9567"
 ```
 
-
+## 感谢与reference
+- 感谢赵栋栋提供的技术支持
+- https://cccignore.github.io/2025/06/21/%E8%BF%9C%E7%A8%8B%20SSH%20%E4%BD%BF%E7%94%A8%20Codex%EF%BC%9A%E8%BD%AC%E5%8F%91%E6%9C%AC%E5%9C%B0%20Clash%20%E4%BB%A3%E7%90%86%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/index.html
 
 
 
