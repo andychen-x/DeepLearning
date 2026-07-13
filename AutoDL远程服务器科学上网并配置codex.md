@@ -142,37 +142,31 @@ vscode下载codex插件才会生成.codex文件
 # ========== 代理配置 ==========
 PROXY_SERVER="127.0.0.1"
 PROXY_PORT="9567"
+TEST_URL="https://www.gstatic.com/generate_204"
 NO_PROXY_LIST="localhost,127.0.0.1,.local,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
 
-# ========== 检测参数（针对300ms代理优化） ==========
-TEST_URL="https://connectivitycheck.gstatic.com/generate_204"
-CONNECT_TIMEOUT=1   # 端口不通时1秒快速失败
-MAX_TIMEOUT=2       # 总超时上限，300ms代理实际仅需几百毫秒
+unset http_proxy https_proxy HTTP_PROXY HTTPS_PROXY no_proxy NO_PROXY
 
-# ========== 检测+配置 一步完成 ==========
-if {
-    # 优先：curl走代理实测外网连通性（彻底解决端口通但代理失效的假阳性）
-    command -v curl &>/dev/null && \
-    http_proxy="" https_proxy="" no_proxy="" \
-    HTTP_PROXY="" HTTPS_PROXY="" NO_PROXY="" \
-    curl -s -o /dev/null \
-         --connect-timeout "$CONNECT_TIMEOUT" \
-         --max-time "$MAX_TIMEOUT" \
-         --proxy "http://$PROXY_SERVER:$PROXY_PORT" \
-         "$TEST_URL"
-} || {
-    # 降级：无curl环境退化为本地端口检测
-    ! command -v curl &>/dev/null && (echo > /dev/tcp/$PROXY_SERVER/$PROXY_PORT) 2>/dev/null
-}; then
-    echo "代理可用，使用 HTTP 代理"
-    export http_proxy="http://$PROXY_SERVER:$PROXY_PORT"
-    export https_proxy="http://$PROXY_SERVER:$PROXY_PORT"
-    export HTTP_PROXY="http://$PROXY_SERVER:$PROXY_PORT"
-    export HTTPS_PROXY="http://$PROXY_SERVER:$PROXY_PORT"
-    export no_proxy="$NO_PROXY_LIST"
-    export NO_PROXY="$NO_PROXY_LIST"
+if (echo > /dev/tcp/$PROXY_SERVER/$PROXY_PORT) 2>/dev/null; then
+    HTTP_CODE=$(curl -x "http://$PROXY_SERVER:$PROXY_PORT" \
+        -s -o /dev/null -w "%{http_code}" \
+        --connect-timeout 2 --max-time 3 \
+        "$TEST_URL" 2>/dev/null)
+
+    if [ -n "$HTTP_CODE" ] && [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 400 ]; then
+        echo "本地代理可用，服务器使用代理"
+        export http_proxy="http://$PROXY_SERVER:$PROXY_PORT"
+        export https_proxy="http://$PROXY_SERVER:$PROXY_PORT"
+        export HTTP_PROXY="http://$PROXY_SERVER:$PROXY_PORT"
+        export HTTPS_PROXY="http://$PROXY_SERVER:$PROXY_PORT"
+        export no_proxy="$NO_PROXY_LIST"
+        export NO_PROXY="$NO_PROXY_LIST"
+    else
+        echo "代理端口存在，但代理不可用，服务器切换直连"
+        unset http_proxy https_proxy HTTP_PROXY HTTPS_PROXY no_proxy NO_PROXY
+    fi
 else
-    echo "代理不可用，切换到直连"
+    echo "未检测到 SSH 代理转发，服务器使用直连"
     unset http_proxy https_proxy HTTP_PROXY HTTPS_PROXY no_proxy NO_PROXY
 fi
 
