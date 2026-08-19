@@ -5,9 +5,12 @@
 
 ## 0️⃣ 前置准备：确认本地代理正常
 
-先确保你本地的 Clash 能联网。在本地电脑终端执行：
+先确保你本地的 Clash 能联网。在本地电脑powershell终端执行(不是cmd)：
+
 ```bash
+# Windows自带的powershell版本可能过低，识别不到curl，用第二条，powershell 7用第一条
 curl -x http://127.0.0.1:7897 -I https://www.google.com
+curl.exe -x http://127.0.0.1:7897 -I https://www.google.com
 ```
 若返回 HTTP/2 200 或 301 / 308，说明代理可用 ✅
 ```bash
@@ -44,6 +47,7 @@ SSH 客户端命令，作用是通过 SSH 加密协议远程登录连接服务�
 常规 SSH 默认端口是 22，这里远程服务器region-9.autodl.pro把 SSH 端口改成了25327，必须通过这个端口才能连上。
 - -R 9567:127.0.0.1:9567（远程端口转发，核心功能）
 格式规范：-R 远程端口:本地IP:本地端口
+9567 代理端口，比如7897等   
 含义：在远端服务器（也就是region-9.autodl.pro这台机器）开放 9567 端口；只要访问远端服务器的127.0.0.1:9567，流量就会经由 SSH 隧道转发回你自己本地电脑的127.0.0.1:9567。
 典型用处：比如你本地 Clash 代理监听了本机 9567 端口，远程服务器就可以借助这条隧道走你本地的代理网络。
 - -o ServerAliveInterval=60
@@ -76,13 +80,16 @@ curl -I https://www.google.com
 2.2 永久生效（登录自动加载）
 将上述环境变量追加到 shell 配置文件。
 
-bash
+bash（一般来说都是bash，zsh左边是丑了吧唧的右箭头，参考oh-my-zsh）
 ```bash
 echo 'export http_proxy="http://127.0.0.1:9567"' >> ~/.bashrc
 echo 'export https_proxy="http://127.0.0.1:9567"' >> ~/.bashrc
 echo 'export no_proxy="localhost,127.0.0.1,.local"' >> ~/.bashrc
+# 大写三条也可以写
 source ~/.bashrc
 ```
+
+<img width="232" height="53" alt="image" src="https://github.com/user-attachments/assets/fa5947e0-e6ef-40da-9045-d6a3cc2b3454" />
 
 zsh
 ```zsh
@@ -112,6 +119,8 @@ git clone https://github.com/openai/openai-cookbook.git
 
 config文件
 点击左下角ssh，连接到主机，配置SSH主机
+
+快捷方式：ctrl+shift+p ->顶部窗口 Remote-SSH: Open SSH Configuration File->C:\Users\你的用户名\.ssh\config(配置文件自己习惯来定)
 ```
 # AutoDL
 Host region-9.autodl.pro
