@@ -17,15 +17,16 @@
 接着，点击登录的账号，进入账号设置，点击 国家或地区 搜索并选择 美国，点击继续并同意条款。
 
 就会弹出添加付款方式的页面，只有：
-- 信用卡/借记卡  Visa, MasterCard, Discover Network,
-- 美国运通卡 PayPal
+- （1）信用卡/借记卡  Visa, MasterCard, Discover Network,
+- （2）美国运通卡 PayPal
+  
 两种，这也正是网上大家注册时的常见问题。解决方法：
 打开“小火箭”（下载UU加速器）。
 然后重复上述过程，就能看到“无”：
 就会弹出添加付款方式的页面，只有：
-- 信用卡/借记卡  Visa, MasterCard, Discover Network,
-- 美国运通卡 PayPal
-- 无
+- （1）信用卡/借记卡  Visa, MasterCard, Discover Network,
+- （2）美国运通卡 PayPal
+- （3）无
 
 接着填写账单寄送地址 随意填，但州、市建议大家选择 5大免税州（俄勒冈州\特拉华州\蒙大拿州\阿拉斯加州\新罕布什尔州），具体的邮编和州、市 使用AI或[美国免税州地址生成器](https://usaddressgen.com/)生成。
 全部填完记得截图保存。
