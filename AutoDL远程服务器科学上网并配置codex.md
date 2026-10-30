@@ -99,6 +99,8 @@ echo 'export no_proxy="localhost,127.0.0.1,.local"' >> ~/.zshrc
 source ~/.zshrc
 ```
 
+
+
 ## 3️⃣ 测试代理是否生效
 
 在远程服务器执行：
@@ -182,6 +184,21 @@ fi
 # export http_proxy=http://127.0.0.1:9567;  #HTTP
 # export https_proxy=http://127.0.0.1:9567; #HTTPS
 # export no_proxy="localhost,127.0.0.1,.local"
+```
+
+ctrl shrift p ssh(打开远程设置JSON)
+```zsh
+{
+    "http.proxy": "http://127.0.0.1:7890",
+    "http.proxySupport": "on",
+    "http.useLocalProxyConfiguration": false,
+    "http.proxyStrictSSL": false,
+    "http.proxySupport": "override",
+    "terminal.integrated.env.linux": {
+        "http_proxy": "http://127.0.0.1:7890",
+        "https_proxy": "http://127.0.0.1:7890"
+    }
+}
 ```
 
 5.3  创建config.toml
