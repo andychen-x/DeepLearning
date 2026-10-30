@@ -134,6 +134,22 @@ Host region-9.autodl.pro
     ServerAliveCountMax 3
 ```
 
+ctrl+shift+p ->顶部窗口 ssh(打开远程设置JSON)
+```zsh
+{
+    "http.proxy": "http://127.0.0.1:7890",
+    "http.proxySupport": "on",
+    "http.useLocalProxyConfiguration": false,
+    "http.proxyStrictSSL": false,
+    "http.proxySupport": "override",
+    "terminal.integrated.env.linux": {
+        "http_proxy": "http://127.0.0.1:7890",
+        "https_proxy": "http://127.0.0.1:7890"
+    }
+}
+```
+
+
 ## 5️⃣ 远程服务器codex文件配置，先下载codex插件
 
 vscode下载codex插件才会生成.codex文件
@@ -186,20 +202,7 @@ fi
 # export no_proxy="localhost,127.0.0.1,.local"
 ```
 
-ctrl shrift p ssh(打开远程设置JSON)
-```zsh
-{
-    "http.proxy": "http://127.0.0.1:7890",
-    "http.proxySupport": "on",
-    "http.useLocalProxyConfiguration": false,
-    "http.proxyStrictSSL": false,
-    "http.proxySupport": "override",
-    "terminal.integrated.env.linux": {
-        "http_proxy": "http://127.0.0.1:7890",
-        "https_proxy": "http://127.0.0.1:7890"
-    }
-}
-```
+
 
 5.3  创建config.toml
 写入
